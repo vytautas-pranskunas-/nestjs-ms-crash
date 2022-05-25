@@ -1,0 +1,7 @@
+FROM node:16
+
+WORKDIR /app
+ENV PORT=3333
+EXPOSE ${PORT}
+
+CMD npm run web-api:start

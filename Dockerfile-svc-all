@@ -1,0 +1,41 @@
+FROM node:16
+
+COPY apps/svc/articles-importer-svc/package.json /tmp/package.json
+RUN cd /tmp && npm install
+RUN mkdir -p /app && cp -a /tmp/node_modules /app/
+
+WORKDIR /app
+
+COPY dist/apps/svc/images-svc/assets ./assets
+COPY dist/apps/svc/account-svc ./account-svc
+COPY dist/apps/svc/articles-importer-svc ./articles-importer-svc
+COPY dist/apps/svc/articles-svc ./articles-svc
+COPY dist/apps/svc/comments-svc ./comments-svc
+COPY dist/apps/svc/email-svc ./email-svc
+COPY dist/apps/svc/facebook-posts-svc ./facebook-posts-svc
+COPY dist/apps/svc/featured-profiles-svc ./featured-profiles-svc
+COPY dist/apps/svc/feed-svc ./feed-svc
+COPY dist/apps/svc/images-svc ./images-svc
+COPY dist/apps/svc/likes-svc ./likes-svc
+COPY dist/apps/svc/posts-svc ./posts-svc
+COPY dist/apps/svc/profiles-svc ./profiles-svc
+COPY dist/apps/svc/search-svc ./search-svc
+COPY dist/apps/svc/shares-svc ./shares-svc
+
+CMD node ./account-svc/main.js \
+    & node ./articles-importer-svc/main.js \
+    & node ./articles-svc/main.js \
+    & node ./comments-svc/main.js \
+    & node ./email-svc/main.js \
+    & node ./facebook-posts-svc/main.js \
+    & node ./featured-profiles-svc/main.js \
+    & node ./feed-svc/main.js \
+    & node ./images-svc/main.js \
+    & node ./likes-svc/main.js \
+    & node ./posts-svc/main.js \
+    & node ./profiles-svc/main.js \
+    & node ./search-svc/main.js \
+    & node ./shares-svc/main.js
+
+EXPOSE 4000
+

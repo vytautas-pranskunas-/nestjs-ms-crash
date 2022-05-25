@@ -1,0 +1,9 @@
+{
+    "version": 2,
+    "projects": {
+        "api": "apps/api",
+        "category-svc": "apps/svc/category-svc",
+        "core": "libs/core",
+        "svc-core": "libs/svc-core"
+    }
+}

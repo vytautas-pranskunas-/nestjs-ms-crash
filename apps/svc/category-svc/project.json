@@ -1,0 +1,51 @@
+{
+    "sourceRoot": "apps/svc/category-svc/src",
+    "projectType": "application",
+    "targets": {
+        "build": {
+            "executor": "@nrwl/node:webpack",
+            "outputs": ["{options.outputPath}"],
+            "options": {
+                "outputPath": "dist/apps/svc/category-svc",
+                "main": "apps/svc/category-svc/src/main.ts",
+                "tsConfig": "apps/svc/category-svc/tsconfig.app.json",
+                "assets": ["apps/svc/category-svc/src/assets"]
+            },
+            "configurations": {
+                "production": {
+                    "optimization": true,
+                    "extractLicenses": true,
+                    "inspect": false,
+                    "fileReplacements": [
+                        {
+                            "replace": "apps/svc/category-svc/src/environments/environment.ts",
+                            "with": "apps/svc/category-svc/src/environments/environment.prod.ts"
+                        }
+                    ]
+                }
+            }
+        },
+        "serve": {
+            "executor": "@nrwl/node:node",
+            "options": {
+                "buildTarget": "category-svc:build"
+            }
+        },
+        "lint": {
+            "executor": "@nrwl/linter:eslint",
+            "outputs": ["{options.outputFile}"],
+            "options": {
+                "lintFilePatterns": ["apps/svc/category-svc/**/*.ts"]
+            }
+        },
+        "test": {
+            "executor": "@nrwl/jest:jest",
+            "outputs": ["coverage/apps/svc/category-svc"],
+            "options": {
+                "jestConfig": "apps/svc/category-svc/jest.config.ts",
+                "passWithNoTests": true
+            }
+        }
+    },
+    "tags": []
+}

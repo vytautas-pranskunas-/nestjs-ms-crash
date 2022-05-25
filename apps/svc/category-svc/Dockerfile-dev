@@ -1,0 +1,8 @@
+FROM node:16
+
+WORKDIR /app
+ENV PORT=4000
+EXPOSE ${PORT}
+
+CMD npm run category-svc:start
+
